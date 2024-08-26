@@ -14,9 +14,16 @@ export const GUEST_TYPE = {
   SYED: "Syed",
 };
 
-export const AQIELA_MESSAGE = (encodedKey: string) => `
+export const AQIELA_MESSAGE = (encodedKey: string, numberOfGuest: number) => {
+  const additional =
+    numberOfGuest === 2
+      ? " dan pasangan "
+      : numberOfGuest >= 3
+        ? " dan keluarga "
+        : " ";
+  return `
 بِسۡـــــــــمِ ٱللهِ ٱلرَّحۡـمَـٰنِ ٱلرَّحِـــــــيمِ
-Dengan penuh kesyukuran, kami *Ismathinoon bin Haji Abdul Rahman & Nur Athiyah Binti Abdullah* dengan rendah hati menjemput Dato' Seri/ Datin Seri/ Dato’/ Datin/ Tuan/ Puan/ Encik/ Cik dan pasangan ke Majlis Pertunangan puteri kami
+Dengan penuh kesyukuran, kami *Ismathinoon bin Haji Abdul Rahman & Nur Athiyah Binti Abdullah* dengan rendah hati menjemput Dato' Seri/ Datin Seri/ Dato’/ Datin/ Tuan/ Puan/ Encik/ Cik${additional}ke Majlis Pertunangan puteri kami
 
 *Aqiela Munirah & Syed Ismail*
 
@@ -37,6 +44,7 @@ Untuk memudahkan urusan persiapan, kami amat menghargai sekiranya anda dapat men
 
 Semoga dengan kehadiran tetamu semua dapat membawa bersama rahmat dan barakah ke dalam majlis kami
 `;
+};
 
 export const SYED_MESSAGE = (encodedKey: string) => `
 JEMPUTAN MAJLIS PERTUNANGAN 

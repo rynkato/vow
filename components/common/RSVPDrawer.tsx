@@ -18,7 +18,8 @@ import {
 } from "@/components/ui/drawer";
 import { GUEST_RESPONSE } from "@/lib/config";
 import Checkmark from "@/public/lottie/checkmark.json";
-import Wedding from "@/public/lottie/wedding.json";
+import WeddingAqiela from "@/public/lottie/wedding-aqiela.json";
+import WeddingSyed from "@/public/lottie/wedding-syed.json";
 import { GuestData } from "@/types";
 
 const Lottie = dynamic(() => import("lottie-react"));
@@ -46,7 +47,7 @@ export function RSVPDrawer({
   setLoading: (_val: boolean | ((_prev: boolean) => boolean)) => void;
   type: string;
 }) {
-  const [numberOfGuest, setNumberOfGuest] = React.useState(1);
+  const [numberOfGuest, setNumberOfGuest] = React.useState(0);
   const maxGuests = maxGuestQuantity;
   const weddingLottieRef = React.useRef<LottieRefCurrentProps>(null);
 
@@ -94,7 +95,7 @@ export function RSVPDrawer({
             >
               <Lottie
                 lottieRef={weddingLottieRef}
-                animationData={Wedding}
+                animationData={type === "Aqiela" ? WeddingAqiela : WeddingSyed}
                 loop={false}
                 className="w-[250px]"
                 onComplete={() => setLoading(false)}

@@ -119,7 +119,7 @@ export function AdminTable({ data, setData }: any) {
     {
       id: "send_message",
       cell: ({ row }: any) => {
-        const { id, uuid, phone_number, type } = row.original;
+        const { id, uuid, phone_number, type, quantity } = row.original;
 
         const handleSendMessage = async () => {
           try {
@@ -138,7 +138,7 @@ export function AdminTable({ data, setData }: any) {
 
         return (
           <a
-            href={`https://api.whatsapp.com/send?phone=${phone_number}&text=${encodeURIComponent(type === "Aqiela" ? AQIELA_MESSAGE(encode(id)) : SYED_MESSAGE(encode(id)))}`}
+            href={`https://api.whatsapp.com/send?phone=${phone_number}&text=${encodeURIComponent(type === "Aqiela" ? AQIELA_MESSAGE(encode(id), quantity) : SYED_MESSAGE(encode(id)))}`}
             target="_blank"
             rel="noopener noreferrer"
           >

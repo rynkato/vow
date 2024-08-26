@@ -50,6 +50,8 @@ export default function HomeUUID({
   const router = useRouter();
   const uuid = String(router?.query?.uuid);
 
+  const path = router?.asPath;
+
   const [invitation, setInvitation] = useState<GuestData>(invitationData);
 
   useEffect(() => {
@@ -82,6 +84,31 @@ export default function HomeUUID({
         <meta
           name="theme-color"
           content={invitation.guest_type === "Aqiela" ? "#bdd3ab" : "#eaf0dc"}
+        />
+
+        <meta
+          property="og:url"
+          content={`https://aqielasyed.azushi.com${path}`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Aqiela & Syed" />
+        <meta property="og:description" content="Aqiela & Syed's Invitation" />
+        <meta
+          property="og:image"
+          content={`https://aqielasyed.azushi.com/${invitation.guest_type === "Aqiela" ? "aqiela-og" : "syed-og"}.webp`}
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="aqielasyed.azushi.com" />
+        <meta
+          property="twitter:url"
+          content={`https://aqielasyed.azushi.com${path}`}
+        />
+        <meta name="twitter:title" content="Aqiela & Syed" />
+        <meta name="twitter:description" content="Aqiela & Syed's Invitation" />
+        <meta
+          name="twitter:image"
+          content={`https://aqielasyed.azushi.com/${invitation.guest_type === "Aqiela" ? "aqiela-og" : "syed-og"}.webp`}
         />
       </Head>
       <div vaul-drawer-wrapper="" className="overflow-hidden">

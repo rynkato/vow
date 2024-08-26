@@ -29,6 +29,25 @@ export default function Home() {
         <meta name="theme-color" content="#bdd3ab" />
 
         <link rel="preload" as="image" href="/bg.webp" />
+
+        <meta property="og:url" content="https://aqielasyed.azushi.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Aqiela & Syed" />
+        <meta property="og:description" content="Aqiela & Syed's Invitation" />
+        <meta
+          property="og:image"
+          content="https://aqielasyed.azushi.com/aqiela-og.webp"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="aqielasyed.azushi.com" />
+        <meta property="twitter:url" content="https://aqielasyed.azushi.com" />
+        <meta name="twitter:title" content="Aqiela & Syed" />
+        <meta name="twitter:description" content="Aqiela & Syed's Invitation" />
+        <meta
+          name="twitter:image"
+          content="https://aqielasyed.azushi.com/aqiela-og.webp"
+        />
       </Head>
       <div vaul-drawer-wrapper="" className="overflow-hidden">
         <main
@@ -73,6 +92,7 @@ export default function Home() {
                 height={drawerHeight}
                 isMapDrawerOpen={isMapDrawerOpen}
                 setMapDrawerOpen={setMapDrawerOpen}
+                type="Aqiela"
               />
             </div>
           </motion.div>
