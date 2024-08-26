@@ -14,33 +14,33 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { MessageStatusResponseAggregation } from "@/types";
 
 const chartConfig = {
-  attending: {
-    label: "Attending",
+  sent: {
+    label: "Sent",
     color: "hsl(var(--chart-1))",
   },
-  not_attending: {
-    label: "Not Attending",
+  not_sent: {
+    label: "Not Sent",
     color: "hsl(var(--chart-2))",
-  },
-  no_response: {
-    label: "No Response",
-    color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig;
 
-export function RadialChartStacked({ chartData }: any) {
-  const totalVisitors =
-    chartData[0].attending +
-    chartData[0].not_attending +
-    chartData[0].no_response;
+export function RequestSentRadialChartStacked({
+  chartData,
+}: {
+  chartData: MessageStatusResponseAggregation;
+}) {
+  const totalVisitors = chartData.sent + chartData.not_sent;
 
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Invitations</CardTitle>
-        <CardDescription>Statistics on the number of responses</CardDescription>
+        <CardTitle>Request Sent</CardTitle>
+        <CardDescription>
+          Statistics on the number of requests sent
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
@@ -48,17 +48,16 @@ export function RadialChartStacked({ chartData }: any) {
           className="mx-auto aspect-square w-full max-w-[250px]"
         >
           <RadialBarChart
-            data={chartData}
+            data={[chartData]}
             endAngle={180}
             innerRadius={80}
             outerRadius={130}
           >
-            <div className="min-w-[150px]">
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent hideLabel />}
-              />
-            </div>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+              wrapperStyle={{ minWidth: "150px" }}
+            />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }: any) => {
@@ -77,7 +76,7 @@ export function RadialChartStacked({ chartData }: any) {
                           y={(viewBox.cy || 0) + 4}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Invites
                         </tspan>
                       </text>
                     );
@@ -86,22 +85,15 @@ export function RadialChartStacked({ chartData }: any) {
               />
             </PolarRadiusAxis>
             <RadialBar
-              dataKey="attending"
+              dataKey="sent"
               stackId="a"
               cornerRadius={5}
               fill="rgb(13 148 136)"
               className="stroke-transparent stroke-2"
             />
             <RadialBar
-              dataKey="not_attending"
+              dataKey="not_sent"
               fill="rgb(239 68 68)"
-              stackId="a"
-              cornerRadius={5}
-              className="stroke-transparent stroke-2"
-            />
-            <RadialBar
-              dataKey="no_response"
-              fill="rgb(212 212 212)"
               stackId="a"
               cornerRadius={5}
               className="stroke-transparent stroke-2"
@@ -112,16 +104,12 @@ export function RadialChartStacked({ chartData }: any) {
       <CardFooter className="self-center">
         <div className="flex flex-col">
           <div className="flex flex-row items-center gap-2">
-            <div className="w-[10px] h-[10px] bg-teal-600" />
-            <span className="text-xs">Attending</span>
+            <div className="w-[10px] h-[10px] bg-teal-600 rounded-[2px]" />
+            <span className="text-xs">Sent - {chartData.sent}</span>
           </div>
           <div className="flex flex-row items-center gap-2">
-            <div className="w-[10px] h-[10px] bg-red-500" />
-            <span className="text-xs">Not Attending</span>
-          </div>
-          <div className="flex flex-row items-center gap-2">
-            <div className="w-[10px] h-[10px] bg-neutral-300" />
-            <span className="text-xs">No Response</span>
+            <div className="w-[10px] h-[10px] bg-red-500 rounded-[2px]" />
+            <span className="text-xs">Not Sent - {chartData.not_sent}</span>
           </div>
         </div>
       </CardFooter>

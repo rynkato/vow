@@ -14,20 +14,49 @@ import {
 import GoogleMaps from "@/public/icons/googlemaps.svg";
 import Waze from "@/public/icons/waze.svg";
 
-export function MapDrawer({ height }: { height: string }) {
+export function MapDrawer({
+  height,
+  isMapDrawerOpen,
+  setMapDrawerOpen,
+  type,
+}: {
+  height: string;
+  isMapDrawerOpen: boolean;
+  setMapDrawerOpen: (_open: boolean | ((_prev: boolean) => boolean)) => void;
+  type: string;
+}) {
   return (
-    <Drawer>
+    <Drawer
+      open={isMapDrawerOpen}
+      onOpenChange={(open) => setMapDrawerOpen(open)}
+    >
       <DrawerTrigger asChild>
-        <Button variant="ghost" className="w-full" style={{ height: height }}>
+        <Button
+          variant="ghost"
+          className="w-full bottom-button-rsvp-map"
+          style={{
+            height: height,
+            color: type === "Aqiela" ? "#894147" : "#485022",
+          }}
+        >
           Map
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent
+        style={{
+          backgroundColor: type === "Aqiela" ? "#f1d2cb" : "#d8ddbc",
+          border: `1px solid ${type === "Aqiela" ? "#f1d2cb" : "#d8ddbc"}`,
+        }}
+      >
         <div className="mx-auto w-full max-w-sm pt-4 px-4 pb-12">
           <div className="flex flex-col w-full gap-8 items-center">
             <DrawerHeader>
               <DrawerTitle>Location</DrawerTitle>
-              <DrawerDescription>Book the place in advance.</DrawerDescription>
+              <DrawerDescription
+                style={{ color: type === "Aqiela" ? "#b7878c" : "#90976c" }}
+              >
+                Get directions to the event.
+              </DrawerDescription>
             </DrawerHeader>
 
             <div className="flex flex-col items-center justify-center space-x-2">
@@ -40,7 +69,11 @@ export function MapDrawer({ height }: { height: string }) {
                   <Button
                     variant="default"
                     className="gap-2"
-                    style={{ minWidth: 150 }}
+                    style={{
+                      minWidth: 150,
+                      backgroundColor:
+                        type === "Aqiela" ? "#bf626a" : "#82895f",
+                    }}
                   >
                     <Image
                       src={GoogleMaps}
@@ -51,11 +84,19 @@ export function MapDrawer({ height }: { height: string }) {
                     Google Maps
                   </Button>
                 </a>
-                <a href="https://www.waze.com/live-map/directions/kl-gateway-mall-jalan-kerinchi-2-kuala-lumpur?to=place.w.66650143.666239287.11721931">
+                <a
+                  href="https://ul.waze.com/ul?place=ChIJmxf0vEBJzDER3-lReq3v08w&ll=3.11443880%2C101.66326050&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button
                     variant="default"
                     className="gap-2"
-                    style={{ minWidth: 150 }}
+                    style={{
+                      minWidth: 150,
+                      backgroundColor:
+                        type === "Aqiela" ? "#bf626a" : "#82895f",
+                    }}
                   >
                     <Image
                       src={Waze}

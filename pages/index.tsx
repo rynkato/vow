@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 import { Inter } from "next/font/google";
@@ -6,15 +6,15 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { MapDrawer } from "@/components/common/MapDrawer";
-import { RSVPDrawer } from "@/components/common/RSVPDrawer";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import landingImage from "@/public/landing.webp";
+import aqielaLanding from "@/public/aqiela.webp";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function Home() {
   const drawerHeight = "50px";
+
+  const [isMapDrawerOpen, setMapDrawerOpen] = useState<boolean>(false);
 
   useEffect(() => {
     window.scrollTo(0, 1);
@@ -28,7 +28,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#bdd3ab" />
 
-        <link rel="preload" as="image" href="bg.webp" />
+        <link rel="preload" as="image" href="/bg.webp" />
       </Head>
       <div vaul-drawer-wrapper="" className="overflow-hidden">
         <main
@@ -43,6 +43,7 @@ export default function Home() {
           }}
         >
           <motion.div
+            className="opacity-0 scale-[200]"
             animate={{
               scale: [2, 1],
               opacity: [0, 1],
@@ -50,7 +51,7 @@ export default function Home() {
             transition={{ ease: "easeInOut", duration: 1.3 }}
           >
             <Image
-              src={landingImage}
+              src={aqielaLanding}
               alt="Aqiela & Syed"
               priority
               className="object-contain p-2"
@@ -62,16 +63,17 @@ export default function Home() {
             animate={{
               bottom: [-50, 0],
             }}
-            transition={{ ease: "easeInOut", duration: 1.3 }}
+            transition={{ ease: "easeInOut", duration: 0.3 }}
           >
-            <div className="flex flex-row rounded-t-lg bg-white">
-              <RSVPDrawer height={drawerHeight} />
-              <Separator
-                orientation="vertical"
-                className="h-auto my-1"
-                style={{ backgroundColor: "#bdd3ab" }}
+            <div
+              className="flex flex-row rounded-t-lg"
+              style={{ backgroundColor: "#f1d2cb" }}
+            >
+              <MapDrawer
+                height={drawerHeight}
+                isMapDrawerOpen={isMapDrawerOpen}
+                setMapDrawerOpen={setMapDrawerOpen}
               />
-              <MapDrawer height={drawerHeight} />
             </div>
           </motion.div>
         </main>

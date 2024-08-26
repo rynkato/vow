@@ -9,7 +9,11 @@ export function handleRequest(variables: { [key: string]: any }) {
   const errors: string[] = [];
 
   Object.keys(variables).forEach((key) => {
-    if (!variables[key]) {
+    if (
+      variables[key] === undefined ||
+      variables[key] === null ||
+      variables[key] === ""
+    ) {
       errors.push(key);
     }
   });

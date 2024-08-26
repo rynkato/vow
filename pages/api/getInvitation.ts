@@ -12,7 +12,7 @@ export default async function handler(
   let params: any[] = [];
 
   if (uuid) {
-    sql += " WHERE guest_uuid = ?";
+    sql += " WHERE id = ?";
     params.push(uuid);
   }
 

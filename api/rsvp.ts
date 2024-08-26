@@ -1,20 +1,22 @@
 import axios from "axios";
 
-interface UpdateMessageStatusResponse {
+interface RSVPResponse {
   success: boolean;
   message?: string;
 }
 
-export const updateMessageStatus = async (
+export const rsvp = async (
   uuid: number,
   messageStatus: string,
-): Promise<UpdateMessageStatusResponse> => {
+  quantity: number,
+): Promise<RSVPResponse> => {
   try {
     const response = await axios.post(
-      "https://aqielasyed.azushi.com/api/updateMessageStatus/",
+      "https://aqielasyed.azushi.com/api/rsvp/",
       {
         uuid: uuid,
-        guest_message_status: messageStatus,
+        guest_response: messageStatus,
+        guest_quantity_confirmed: quantity,
       },
     );
     return response.data;

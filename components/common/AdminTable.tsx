@@ -13,8 +13,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-/* eslint-enable import/named */
+/* eslint-disable import/named */
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpDown, ChevronDown, Send } from "lucide-react";
+import { useInView } from "react-intersection-observer";
 
 import { updateMessageStatus } from "@/api/updateMessageStatus";
 import { Button } from "@/components/ui/button";
@@ -33,7 +35,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MESSAGE_STATUS } from "@/lib/config";
+import { AQIELA_MESSAGE, MESSAGE_STATUS, SYED_MESSAGE } from "@/lib/config";
+import { encode } from "@/lib/encoding";
 
 export function AdminTable({ data, setData }: any) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -43,6 +46,8 @@ export function AdminTable({ data, setData }: any) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  const { ref, inView } = useInView();
 
   const columns: ColumnDef<{
     uuid: string;
@@ -114,27 +119,33 @@ export function AdminTable({ data, setData }: any) {
     {
       id: "send_message",
       cell: ({ row }: any) => {
-        const { uuid, phone_number } = row.original;
+        const { id, uuid, phone_number, type } = row.original;
+
+        const handleSendMessage = async () => {
+          try {
+            await updateMessageStatus(uuid, MESSAGE_STATUS.SENT);
+            setData((prevData: any) =>
+              prevData.map((item: any) =>
+                item.uuid === uuid
+                  ? { ...item, message_status: MESSAGE_STATUS.SENT }
+                  : item,
+              ),
+            );
+          } catch (error) {
+            // console.error("Failed to update message status:", error);
+          }
+        };
 
         return (
           <a
-            href={`https://web.whatsapp.com/${phone_number}`}
+            href={`https://api.whatsapp.com/send?phone=${phone_number}&text=${encodeURIComponent(type === "Aqiela" ? AQIELA_MESSAGE(encode(id)) : SYED_MESSAGE(encode(id)))}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <Button
               aria-label="Send"
               variant="outline"
-              onClick={() => {
-                updateMessageStatus(uuid, MESSAGE_STATUS.SENT);
-                setData((prevData: any) =>
-                  prevData.map((item: any) =>
-                    item.uuid === uuid
-                      ? { ...item, message_status: MESSAGE_STATUS.SENT }
-                      : item,
-                  ),
-                );
-              }}
+              onClick={handleSendMessage}
             >
               <Send />
             </Button>
@@ -165,7 +176,7 @@ export function AdminTable({ data, setData }: any) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex flex-col md:flex-row items-center py-4 gap-4">
         <Input
           placeholder="Filter names..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -174,9 +185,17 @@ export function AdminTable({ data, setData }: any) {
           }
           className="max-w-sm"
         />
+        <Input
+          placeholder="Filter type..."
+          value={(table.getColumn("type")?.getFilterValue() as string) ?? ""}
+          onChange={(event: any) =>
+            table.getColumn("type")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className="md:ml-auto w-full md:w-auto">
               Columns <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -207,7 +226,7 @@ export function AdminTable({ data, setData }: any) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div ref={ref} className="rounded-md border mb-[60px]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup: any) => (
@@ -257,30 +276,38 @@ export function AdminTable({ data, setData }: any) {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+      <AnimatePresence>
+        {inView && (
+          <motion.div
+            className="flex items-center justify-end space-x-2 fixed w-full left-0 px-8 py-4 bg-white border-t-2"
+            animate={{ bottom: [-70, 0] }}
+            exit={{ bottom: [0, -70] }}
           >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
+            <div className="flex-1 text-sm text-muted-foreground">
+              {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()} pages.
+            </div>
+            <div className="space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                Next
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
