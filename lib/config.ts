@@ -35,12 +35,12 @@ Dengan penuh kesyukuran, kami *Ismathinoon bin Haji Abdul Rahman & Nur Athiyah B
 *Ismathinoon*  - 0126690105
 *Amirul* - 01137853588
 
+RSVP:
+Untuk memudahkan urusan persiapan, kami amat menghargai sekiranya anda dapat mengesahkan kehadiran anda selewat-lewatnya pada *1st September 2024* di https://aqielasyed.azushi.com/${encodedKey}/.
+
 📍 *Navigation link to The Hall @ KL Gateway Mall*:
 * Waze Link : https://aqielasyed.azushi.com/waze/
 * Google Maps : https://aqielasyed.azushi.com/maps/
-
-RSVP:
-Untuk memudahkan urusan persiapan, kami amat menghargai sekiranya anda dapat mengesahkan kehadiran anda selewat-lewatnya pada *1st September 2024* di https://aqielasyed.azushi.com/${encodedKey}/.
 
 Semoga dengan kehadiran tetamu semua dapat membawa bersama rahmat dan barakah ke dalam majlis kami
 `;
@@ -62,18 +62,16 @@ Dengan ini sangat berbesar hati menjemput Dato'/Datin/Tuan/Puan/Encik/Cik untuk 
 di butiran berikut:
 
 📆 *Ahad, 15 SEPTEMBER 2024*
- 
+🍛 *7.00pm - 10:00pm*
+
+RSVP:
+Untuk memudahkan urusan persiapan, kami amat menghargai sekiranya anda dapat mengesahkan kehadiran anda selewat-lewatnya pada *1st September 2024* di https://aqielasyed.azushi.com/${encodedKey}/.
+
 🏡 *THE HALL, KL GATEWAY MALL (UG.02, LEVEL 2)*
 * Waze Link : https://aqielasyed.azushi.com/waze/
 * Google Maps : https://aqielasyed.azushi.com/maps/
 
-🍛 *7.00pm - 10:00pm*
-
-RSVP:
-Untuk memudahkan urusan persiapan, kami amat menghargai sekiranya anda dapat mengesahkan kehadiran anda selewat-lewatnya pada *1st September 2024* di https://aqielasyed.azushi.com/${encodedKey}/. 
-
 Kehadiran dan doa restu anda amatlah kami hargai untuk sama-sama memeriahkan majlis ini.
-
 
 𝑨𝒎𝒊𝒊𝒏 𝒀𝒂 𝑹𝒂𝒃𝒃𝒂𝒍 𝑨'𝒍𝒂𝒎𝒊𝒏
 

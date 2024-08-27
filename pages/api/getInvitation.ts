@@ -6,14 +6,24 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { uuid } = req.query;
+  const { uuid, guest_type } = req.query;
 
   let sql = "SELECT * FROM invitation_engagement";
   let params: any[] = [];
+  let conditions: string[] = [];
 
   if (uuid) {
-    sql += " WHERE id = ?";
+    conditions.push("id = ?");
     params.push(uuid);
+  }
+
+  if (guest_type) {
+    conditions.push("guest_type = ?");
+    params.push(guest_type);
+  }
+
+  if (conditions.length > 0) {
+    sql += " WHERE " + conditions.join(" AND ");
   }
 
   try {

@@ -95,7 +95,12 @@ export default function HomeUUID({
         <meta property="og:description" content="Aqiela & Syed's Invitation" />
         <meta
           property="og:image"
+          itemProp="image"
           content={`https://aqielasyed.azushi.com/${invitation.guest_type === "Aqiela" ? "aqiela-og" : "syed-og"}.webp`}
+        />
+        <meta
+          property="og:logo"
+          content="https://aqielasyed.azushi.com/logo.webp"
         />
 
         <meta name="twitter:card" content="summary_large_image" />

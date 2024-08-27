@@ -21,14 +21,14 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const getServerSideProps = (async () => {
   try {
-    const invitationData = await getInvitations();
+    const invitationData = await getInvitations("Aqiela");
     return { props: { invitationData } };
   } catch (error) {
     return { props: { invitationData: [] } };
   }
 }) satisfies GetServerSideProps<{ invitationData: GuestData[] }>;
 
-export default function Admin({
+export default function AdminAqiela({
   invitationData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [data, setData] = useState<GuestDataFormatted[]>(
@@ -54,15 +54,6 @@ export default function Admin({
   const [messageStatusChartDataAqiela, setMessageStatusChartDataAqiela] =
     useState<MessageStatusResponseAggregation>({ sent: 0, not_sent: 0 });
 
-  const [invitationsChartDataSyed, setInvitationsChartDataSyed] =
-    useState<InvitationResponseAggregation>({
-      attending: 0,
-      not_attending: 0,
-      no_response: 0,
-    });
-  const [messageStatusChartDataSyed, setMessageStatusChartDataSyed] =
-    useState<MessageStatusResponseAggregation>({ sent: 0, not_sent: 0 });
-
   useEffect(() => {
     const invitationResponseAggregationAqiela: InvitationResponseAggregation = {
       attending: 0,
@@ -75,17 +66,6 @@ export default function Admin({
         not_sent: 0,
       };
 
-    const invitationResponseAggregationSyed: InvitationResponseAggregation = {
-      attending: 0,
-      not_attending: 0,
-      no_response: 0,
-    };
-    const requestSentResponseAggregationSyed: MessageStatusResponseAggregation =
-      {
-        sent: 0,
-        not_sent: 0,
-      };
-
     data.forEach((guest) => {
       if (guest.response === "Attending") {
         if (guest.type === GUEST_TYPE.AQIELA) {
@@ -93,46 +73,30 @@ export default function Admin({
           invitationResponseAggregationAqiela.attending +=
             guest.quantity_confirmed;
           invitationResponseAggregationAqiela.not_attending += remaining;
-        } else if (guest.type === GUEST_TYPE.SYED) {
-          const remaining = guest.quantity - guest.quantity_confirmed;
-          invitationResponseAggregationSyed.attending +=
-            guest.quantity_confirmed;
-          invitationResponseAggregationSyed.not_attending += remaining;
         }
       } else if (guest.response === "Not Attending") {
         if (guest.type === GUEST_TYPE.AQIELA) {
           invitationResponseAggregationAqiela.not_attending += guest.quantity;
-        } else if (guest.type === GUEST_TYPE.SYED) {
-          invitationResponseAggregationSyed.not_attending += guest.quantity;
         }
       } else if (guest.response === "No Response") {
         if (guest.type === GUEST_TYPE.AQIELA) {
           invitationResponseAggregationAqiela.no_response += guest.quantity;
-        } else if (guest.type === GUEST_TYPE.SYED) {
-          invitationResponseAggregationSyed.no_response += guest.quantity;
         }
       }
 
       if (guest.message_status === MESSAGE_STATUS.SENT) {
         if (guest.type === GUEST_TYPE.AQIELA) {
           requestSentResponseAggregationAqiela.sent++;
-        } else if (guest.type === GUEST_TYPE.SYED) {
-          requestSentResponseAggregationSyed.sent++;
         }
       } else if (guest.message_status === MESSAGE_STATUS.NOT_SENT) {
         if (guest.type === GUEST_TYPE.AQIELA) {
           requestSentResponseAggregationAqiela.not_sent++;
-        } else if (guest.type === GUEST_TYPE.SYED) {
-          requestSentResponseAggregationSyed.not_sent++;
         }
       }
     });
 
     setInvitationsChartDataAqiela(invitationResponseAggregationAqiela);
     setMessageStatusChartDataAqiela(requestSentResponseAggregationAqiela);
-
-    setInvitationsChartDataSyed(invitationResponseAggregationSyed);
-    setMessageStatusChartDataSyed(requestSentResponseAggregationSyed);
   }, [data]);
 
   return (
@@ -158,18 +122,6 @@ export default function Admin({
               />
               <RequestSentRadialChartStacked
                 chartData={messageStatusChartDataAqiela}
-              />
-            </div>
-
-            <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-              Statistics for Syed&apos;s Guests
-            </h2>
-            <div className="flex flex-row justify-center md:justify-start gap-8 min-w-[250px] flex-wrap">
-              <InvitationsRadialChartStacked
-                chartData={invitationsChartDataSyed}
-              />
-              <RequestSentRadialChartStacked
-                chartData={messageStatusChartDataSyed}
               />
             </div>
 
