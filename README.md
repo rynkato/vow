@@ -1,40 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Vow
+
+![Next.js](https://img.shields.io/badge/Framework-Next.JS-af52de.svg)
+![Cloudflare](https://img.shields.io/badge/Caching-Cloudflare-orange.svg)
+![MariaDB](https://img.shields.io/badge/Database-MariaDB-blue.svg)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
+Vow is a modern platform designed to handle wedding and engagement invitation RSVPs seamlessly. With its unique design and state-of-the-art UI, Vow ensures an exceptional user experience across all devices, whether desktop, tablet, or mobile. Built on Next.js, it delivers high performance, security, and flexibility for both hosts and guests, ensuring a smooth RSVP process.
+
+## Features
+
+- **Responsive Design:** Vow features a beautiful and responsive interface that is compatible with all device types. Whether on desktop, tablet, or mobile, the UI adapts seamlessly, ensuring a user-friendly experience.
+
+- **Fast & Optimized Performance:** Powered by Next.js and enhanced by caching on Cloudflare, Vow ensures fast loading times and a smooth experience, even during high-traffic periods.
+
+- **Secure RSVP Data Handling:** Vow’s backend API is connected to a MariaDB database to store RSVP information securely. All RSVP data is fetched and managed in a secure and encrypted manner to maintain guest privacy and ensure data integrity.
+
+- **Easy RSVP Management:** Hosts can easily manage and view the RSVP data, allowing them to track responses in real-time and export data for additional processing or sharing.
+
+- **Custom Invitations:** Personalize your event invitations with Vow's customizable invitation templates, designed to suit any wedding or engagement event.
+
+## Why Vow?
+
+- **Seamless User Experience:** Vow’s modern and responsive design ensures that both hosts and guests have a pleasant and easy-to-navigate interface across all devices.
+
+- **Reliability & Performance:** By leveraging Cloudflare caching and Next.js’s server-side rendering, Vow delivers a consistently fast and responsive experience, even with a large number of users.
+
+- **Security & Privacy:** With end-to-end encryption and secure database handling via MariaDB, Vow ensures all guest information remains private and secure.
+
+- **Scalability:** Vow’s architecture is built to handle both small and large events, ensuring smooth performance regardless of the scale of the occasion.
 
 ## Getting Started
 
-First, run the development server:
+To start using Vow, simply create an account on the platform and begin setting up your event. Once your invitations are sent, guests can RSVP through a secure link. You can track and manage RSVPs directly from your dashboard.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Contributing
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+We welcome contributions from the community to enhance Vow's features and functionality. If you'd like to contribute, please fork the repository, make your changes, and submit a pull request.
